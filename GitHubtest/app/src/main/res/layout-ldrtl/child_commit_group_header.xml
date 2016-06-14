@@ -12,7 +12,7 @@
         android:textSize="16sp"
         android:padding="5dp"
         android:textStyle="bold"
-        android:layout_alignParentStart="true"
+        android:textDirection="rtl"
         />
 
     <TextView
@@ -23,7 +23,7 @@
         android:textSize="16sp"
         android:padding="5dp"
         android:textStyle="bold"
-        android:layout_alignParentStart="true"
+        android:textDirection="rtl"
         />
 
 </RelativeLayout>

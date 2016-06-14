@@ -2,6 +2,8 @@ package com.example.srinivas.githubtest.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -22,6 +24,11 @@ public class CommitGroupView extends LinearLayout {
 
     public CommitGroupView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if(context.getResources().getConfiguration().getLayoutDirection()==LAYOUT_DIRECTION_RTL) {
+            Log.i("rtl","is rtl");
+            this.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            this.setGravity(Gravity.START);
+        }
     }
 
     public void setCommits(Context context,List<UserCommit> commits) {
@@ -56,8 +63,10 @@ public class CommitGroupView extends LinearLayout {
         View view=LayoutInflater.from(context).inflate(R.layout.child_commit_group_item,this,false);
         TextView viewMessage=(TextView) view.findViewById(R.id.message);
         TextView viewDate=(TextView) view.findViewById(R.id.date);
-        viewMessage.setText("Message : "+message);
-        viewDate.setText("Date : "+date);
+        String m=context.getResources().getString(R.string.message);
+        String d=context.getResources().getString(R.string.date);
+        viewMessage.setText(m+" : "+message);
+        viewDate.setText(d+" : "+date);
         addView(view,new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.srinivas.githubtest.helper;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.srinivas.githubtest.data.UserCommit;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class GitHubJSONParser {
 
-    public static List<UserCommit> toCommitList(String jsonArray) {
+    public static List<UserCommit> toCommitList(Context context,String jsonArray) {
         try {
             List<UserCommit> commits = new ArrayList<>();
             JSONArray array = new JSONArray(jsonArray);
@@ -24,7 +25,7 @@ public class GitHubJSONParser {
             UserCommit commit;
             for (int i = 0; i < array.length(); i++) {
                 object = array.getJSONObject(i);
-                commit=toUserCommit(object);
+                commit=toUserCommit(context,object);
                 if(commit!=null) commits.add(commit);
             }
             return commits;
@@ -34,7 +35,7 @@ public class GitHubJSONParser {
         return null;
     }
 
-    public static UserCommit toUserCommit(JSONObject jsonObject) {
+    public static UserCommit toUserCommit(Context context,JSONObject jsonObject) {
         try {
             JSONObject author=jsonObject.getJSONObject("commit").getJSONObject("author");
             Log.i("author",author.toString());
@@ -42,7 +43,7 @@ public class GitHubJSONParser {
             String email=author.getString("email");
             String date=author.getString("date");
             String message=jsonObject.getJSONObject("commit").getString("message");
-            return new UserCommit(name,email,message,date);
+            return new UserCommit(context,name,email,message,date);
         }catch (JSONException e) {
             e.printStackTrace();
         }

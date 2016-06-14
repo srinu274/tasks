@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 while ((ch = stream.read()) != -1) {
                     builder.append((char)ch);
                 }
-                return GitHubJSONParser.toCommitList(builder.toString());
+                return GitHubJSONParser.toCommitList(this,builder.toString());
             }
         } catch(IOException e) {
             e.printStackTrace();
